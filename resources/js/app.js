@@ -9,6 +9,8 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 import Vue from 'vue'
+import VueToastr2 from 'vue-toastr-2';
+import 'vue-toastr-2/dist/vue-toastr-2.min.css';
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
 // Install BootstrapVue

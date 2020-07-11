@@ -54,7 +54,7 @@
 
       <b-button v-if="$can('Twitter Anadir')"  @click='anadir_registro()' type='button' class='btn btn-wangir btn-lg' data-toggle='button' size='sm' aria-pressed='false' variant='success' style='margin-bottom: 5px; margin: 5px;'>Añadir registro
       </b-button>
- 
+
       <div class='flexbox  float-right' >
         <form ref='form'    v-on:submit.prevent='consulta()'>
           <b-input-group size='sm' class='float-right  margin-bottom-0' prepend=''  style='margin-bottom: 0px;'>
@@ -80,7 +80,7 @@
         </div>
 
     </div>
-    </div> 
+    </div>
 
 
 </div>
@@ -114,15 +114,15 @@ import Vue from "vue";
 //import "vue-toast-notification/dist/index.css";
 //import Select2 from "v-select2-component";
 //https://www.npmjs.com/package/vue-toastr-2
-//import VueToastr2 from "vue-toastr-2";
-//import "vue-toastr-2/dist/vue-toastr-2.min.css";
-//window.toastr = require("toastr");
-//Vue.use(VueToastr2);
+import VueToastr2 from "vue-toastr-2";
+import "vue-toastr-2/dist/vue-toastr-2.min.css";
+window.toastr = require("toastr");
+Vue.use(VueToastr2);
 
 export default {
   components: {
   //  VueSingleSelect,
-   // VueToastr2,
+    VueToastr2,
     //Select2
   },
   data() {
@@ -138,7 +138,7 @@ export default {
       input_consulta_data:"",
       stickyHeader: true,
       noCollapse: false,
-      
+
 
 
       input_Twitter_id:[],
@@ -181,11 +181,11 @@ export default {
       axios.get(`Twitter/create`).then(response => {
         this.productos_all = response.data;
         this.input_usuario_id = response.data.usuario_id;
-        
+
 
       });
     },
-   
+
     eliminar_registro(data_id){
     this.input_Twitter_id=data_id;
     },
@@ -195,7 +195,7 @@ export default {
         const data = response.data;
         if(response.data.id){
           this.validacion="";
-          //this.$toastr.info("Operacio exitosa", "Datos Eliminados");
+          this.$toastr.info("Operacio exitosa", "Datos Eliminados");
           this.$refs['my-modal'].hide()
           this.consulta(this.page);
         }
@@ -229,12 +229,12 @@ export default {
 
             const datos = response.data;
             if(response.data.errors){
-              //this.$toastr.warning("Verifique los datos", "Verifique los datos");
+              this.$toastr.warning("Verifique los datos", "Verifique los datos");
               this.validacion=response.data.errors;
             }
             if(response.data.id){
               this.validacion="";
-              //this.$toastr.success("Operacio exitosa", "Datos modificados");
+              this.$toastr.success("Operacio exitosa", "Datos modificados");
               this.consulta(this.page);
               this.formulario_Twitter=false;
 
@@ -243,8 +243,8 @@ export default {
         },
         (err) => {
           console.log("Err", err);
-            //this.$toastr.warning(err, "Error en el servidor");
-            //this.$toastr.warning(err.message, "Error en el servidor");
+            this.$toastr.warning(err, "Error en el servidor");
+            this.$toastr.warning(err.message, "Error en el servidor");
         });
 
       }else{
@@ -252,12 +252,12 @@ export default {
         axios.post(`Twitter`, data).then(response => {
             const datos = response.data;
             if(response.data.errors){
-              //this.$toastr.warning("Verifique los datos", "Verifique los datos");
+              this.$toastr.warning("Verifique los datos", "Verifique los datos");
               this.validacion=response.data.errors;
             }
             if(response.data.id){
               this.validacion="";
-              //this.$toastr.success("Operacio exitosa", "Datos modificados");
+              this.$toastr.success("Operacio exitosa", "Datos modificados");
               this.consulta(this.page);
               this.formulario_Twitter=false;
               this.limpiar_form();
@@ -267,8 +267,8 @@ export default {
         },
         (err) => {
           console.log("Err", err);
-            //this.$toastr.warning(err, "Error en el servidor");
-            //this.$toastr.warning(err.message, "Error en el servidor");
+            this.$toastr.warning(err, "Error en el servidor");
+            this.$toastr.warning(err.message, "Error en el servidor");
         }
 
         );
@@ -298,9 +298,9 @@ export default {
       axios.get(`Twitter/${data.id}/edit`).then(response => {
             const data = response.data;
             if(!response.data){
-              //this.$toastr.warning("Operacio no exitosa", "Regitro no obtenido");
+              this.$toastr.warning("Operacio no exitosa", "Regitro no obtenido");
             }else{
-              //this.$toastr.success("Operacio exitosa", "Regitro obtenido");
+              this.$toastr.success("Operacio exitosa", "Regitro obtenido");
               this.editar_dato = true;
               this.input_Twitter_id = data.id
               this.input_id = data.id;
