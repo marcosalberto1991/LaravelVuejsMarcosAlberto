@@ -26,42 +26,36 @@ class TwitterController extends Controller {
 
 	protected $rules =
 	[
-    //'id' => 'required|min:1|max:99999999',
-	   			//'id' => 'required|min:2|max:255',
-          'content' => 'required|min:2|max:255',
-	  // 			'user_id' => 'required|min:1|max:99999999',
-	   	//		'user_id' => 'required|min:2|max:255',
-         // 'created_at' => 'required|min:2|max:255',
-          //'updated_at' => 'required|min:2|max:255',
-
-    //regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ.,()_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ.,()_-]*)*)+$/
+        'content' => 'required|min:2|max:191',
+	   	//'user_id' => 'required|min:2|max:255',
+        //'created_at' => 'required|min:2|max:255',
+        //'updated_at' => 'required|min:2|max:255',
+        //regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ.,()_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ.,()_-]*)*)+$/
 
 	];
 
 	public function index(){
 		return view('Twitter.index', [] );
-  }
-  public function consulta(Request $request){
-    $consulta_data=$request->get("consulta_data");
-    if($consulta_data==""){
-      $data=TwitterModel::with('user_id')->orderBy('created_at', 'ASC')->paginate(3);
-    }else{
-      $data=TwitterModel::where("id",1)
-       //->orwhere("id","like","%". $consulta_data."%")
-        ->orwhere("content","like","%". $consulta_data."%")->with('user_id')->orderBy('created_at', 'ASC')
-      ->paginate(20);
     }
-
-    return response()->json($data);
-  }
+    public function consulta(Request $request){
+        $consulta_data=$request->get("consulta_data");
+        if($consulta_data==""){
+            $data=TwitterModel::with('user_id')->orderBy('created_at', 'ASC')->paginate(3);
+        }else{
+            $data=TwitterModel::where("id",1)
+                ->orwhere("content","like","%". $consulta_data."%")->with('user_id')->orderBy('created_at', 'ASC')
+                ->paginate(20);
+        }
+        return response()->json($data);
+    }
 	public function create(){
-    $data_foraneos = [
-        "usuario_id"=> auth()->user()->id,
-      //"departamento_id" => DepartamentoModel::select("id_departamento as id","departamento as text")->get(),
-		];
-		return response()->json($data_foraneos);
+        $data_foraneos = [
+            "usuario_id"=> auth()->user()->id,
+            //"departamento_id" => DepartamentoModel::select("id_departamento as id","departamento as text")->get(),
+            ];
+            return response()->json($data_foraneos);
 
-  }
+    }
 
 	public function store(Request $request){
 		$validator = Validator::make($request->all(), $this->rules);
@@ -93,13 +87,8 @@ class TwitterController extends Controller {
 			return Response::json(array('errors' => $validator->getMessageBag()->toArray()));
 		} else {
 			$Twitter = TwitterModel::findOrFail($id);
-
-			 $Twitter->content=$request->content;
-				 $Twitter->user_id=$request->user_id;
-				 $Twitter->created_at=$request->created_at;
-				 $Twitter->updated_at=$request->updated_at;
-
-
+			$Twitter->content=$request->content;
+			$Twitter->user_id=$request->user_id;
 			$Twitter->save();
 			return response()->json($Twitter);
 		}
