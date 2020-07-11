@@ -82,12 +82,16 @@ A continuación se mencionan algunos detalles que si bien, no son necesarios, se
  
  
  se recomienda install la siguiente version 
+ 
  npm i bootstrap-vue@2.10.1
 
 
 npm i laravel-vue-pagination
+
 npm install jquery
+
 npm install toastr
+
 npm install vue-toastr-2
  
 php artisan migrate:fresh
