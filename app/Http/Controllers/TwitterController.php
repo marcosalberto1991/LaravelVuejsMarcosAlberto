@@ -76,10 +76,10 @@ class TwitterController extends Controller {
     }
 
 
-  public function edit($id){
-    return response()->json(TwitterModel::findOrFail($id));
+    public function edit($id){
+        return response()->json(TwitterModel::findOrFail($id));
 
-  }
+    }
 
     public function update(Request $request, $id){
 		$validator = Validator::make($request->all(), $this->rules);

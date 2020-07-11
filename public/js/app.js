@@ -2048,15 +2048,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
  //import VueSingleSelect from "vue-single-select";
 //import VueToast from "vue-toast-notification";
 //import "vue-toast-notification/dist/index.css";
@@ -80143,9 +80134,9 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                " +
+                                      "\n                                        " +
                                         _vm._s(data) +
-                                        "\n              "
+                                        "\n                                    "
                                     )
                                   ]
                                 )
@@ -80205,7 +80196,7 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._v("Añadir registro\n      ")]
+                          [_vm._v("Añadir registro\n                    ")]
                         )
                       : _vm._e(),
                     _vm._v(" "),
