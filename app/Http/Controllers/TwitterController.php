@@ -45,10 +45,10 @@ class TwitterController extends Controller
     {
         $consulta_data = $request->get("consulta_data");
         if ($consulta_data == "") {
-            $data = TwitterModel::with('user_id')->orderBy('created_at', 'ASC')->paginate(3);
+            $data = TwitterModel::with('user_id')->orderBy('created_at', 'desc')->paginate(5);
         } else {
             $data = TwitterModel::where("id", 1)
-                ->orwhere("content", "like", "%" . $consulta_data . "%")->with('user_id')->orderBy('created_at', 'ASC')
+                ->orwhere("content", "like", "%" . $consulta_data . "%")->with('user_id')->orderBy('created_at', 'desc')
                 ->paginate(20);
         }
         return response()->json($data);
