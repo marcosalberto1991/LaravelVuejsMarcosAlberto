@@ -65,16 +65,20 @@
                         </form>
                     </div><br><br>
                 </div>
-                <div class="col-4 offset-4 center">
-
-                    <div class="card" style="width: 100%;" v-for="data in consulta_datos.data">
+                <div class="col-6 offset-3 center">
+                    <div class="card" style="width: 100%;" v-for="data in consulta_datos.data" v-bind:key="data.id">
+                        <b-list-group-item class="d-flex align-items-center color-name">
+                            <b-avatar variant="primary" text="BV" class="mr-3 center"></b-avatar>
+                            <span class="mr-auto">
+                                <h4 class="card-title"></h4><b style="font-size: 25px;"></h4>{{data.user_id.name}}</b></h4>
+                            </span>
+                            <b-badge style="font-size: 20px;">{{ data.created_at | moment("from", "now") }}</b-badge>
+                        </b-list-group-item>
                         <div class="card-body">
-                            <p>{{data.created_at}}</p>
-                            <h5 class="card-title">{{data.user_id.name}}</h5>
                             <p class="card-text">{{data.content}}</p>
-                            <a :href="'Twitter/'+data.id" class="btn btn-primary">Ver Mas</a>
-                            <b-button v-if="data.user_id.id==input_usuario_id" v-b-modal.moda-registro size="sm" variant="warning" @click="editar_registro(data)" type="button" class="btn-sm btn btn-wangir mr-1" data-toggle="button" aria-pressed="false" style="margin-bottom: 5px; margin: 5px;">Editar</b-button>
-                            <b-button v-if="data.user_id.id==input_usuario_id" v-b-modal.moda-eliminar @click="eliminar_registro(data.id)" type="button" class="btn-sm btn btn-danger mr-1" size="sm" data-toggle="button" aria-pressed="false" style="margin-bottom: 5px; margin: 5px;">Eliminar</b-button>
+                            <a :href="'Twitter/'+data.id" class="btn-sm btn btn-primary">Ver Mas</a>
+                            <b-button v-if="data.user_id.id==input_usuario_id" v-b-modal.moda-registro variant="warning" @click="editar_registro(data)" type="button" class="btn-sm btn btn-wangir mr-1" data-toggle="button" aria-pressed="false" style="margin-bottom: 5px; margin: 5px;">Editar</b-button>
+                            <b-button v-if="data.user_id.id==input_usuario_id" v-b-modal.moda-eliminar @click="eliminar_registro(data.id)" type="button" class="btn-sm btn btn-danger mr-1" data-toggle="button" aria-pressed="false" style="margin-bottom: 5px; margin: 5px;">Eliminar</b-button>
 
                         </div>
 
@@ -314,3 +318,17 @@ export default {
     }
 };
 </script>
+
+<style scoped>
+p.card-text {
+    font-size: 30px;
+}
+
+.color-name {
+    background-color: #eaeaea;
+}
+
+.card {
+    margin-bottom: 10px
+}
+</style>
