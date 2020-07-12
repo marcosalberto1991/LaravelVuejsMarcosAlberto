@@ -80,9 +80,15 @@ A continuación se mencionan algunos detalles que si bien, no son necesarios, se
  
  composer install 
  
+ npm install
+ 
+ npm run watch 
+ 
+ php artisan migrate:fresh
+
  
  se recomienda install la siguiente version 
- 
+ en caso de que salga error 
  npm i bootstrap-vue@2.10.1
 
 
